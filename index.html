@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Mastery | Ultimate Design</title>
+    <meta name="theme-color" content="#4f46e5">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* ================= Design System ================= */
+        :root {
+            --primary: #4338ca; --primary-light: #6366f1; --accent: #be185d;
+            --bg-body: #f8fafc; --text-dark: #1e293b; --text-gray: #64748b;
+            --gradient-main: linear-gradient(135deg, #4338ca 0%, #be185d 100%);
+            --shadow-soft: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+            --shadow-glow: 0 15px 30px -5px rgba(67, 56, 202, 0.2);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Tajawal', sans-serif; background: var(--bg-body); min-height: 100vh; color: var(--text-dark); display: flex; flex-direction: column; overflow-x: hidden; }
+        
+        /* Header */
+        header { background: white; border-bottom: 4px solid var(--accent); position: sticky; top: 0; z-index: 1000; padding: 15px 0; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .header-wrap { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 900; color: var(--primary); display: flex; gap: 10px; align-items: center; letter-spacing: -0.5px; }
+        .nav-btn { background: var(--primary); color: white; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 800; cursor: pointer; transition: 0.3s; }
+        .nav-btn:hover { background: var(--accent); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(190, 24, 93, 0.3); }
+
+        /* Views */
+        .view { display: none; animation: fadeUp 0.4s ease-out; }
+        .view.active { display: block; }
+        @keyframes fadeUp { from {opacity:0; transform:translateY(15px);} to {opacity:1; transform:translateY(0);} }
+
+        /* Home Grid */
+        .grid-grades { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; margin-top: 40px; }
+        .card-grade { 
+            background: white; border-radius: 24px; padding: 40px 30px; text-align: center; height: 240px; 
+            cursor: pointer; box-shadow: var(--shadow-soft); border-bottom: 6px solid var(--primary); 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
+        .card-grade:hover { transform: translateY(-10px); border-color: var(--accent); box-shadow: var(--shadow-glow); }
+        .card-grade i { font-size: 4rem; background: var(--gradient-main); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; }
+        .card-grade h2 { font-size: 1.6rem; font-weight: 800; color: var(--text-dark); }
+
+        /* =================== Weeks Grid (NEW DESIGN) =================== */
+        .grid-weeks { 
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; margin-top: 30px; 
+        }
+        @media (max-width: 900px) { .grid-weeks { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 600px) { .grid-weeks { grid-template-columns: repeat(2, 1fr); } }
+
+        .card-week { 
+            background: white; border-radius: 24px; height: 160px; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            cursor: pointer; box-shadow: var(--shadow-soft); border: 2px solid transparent; 
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* وثبة جميلة */
+            position: relative; overflow: hidden;
+        }
+        
+        .card-week::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(67, 56, 202, 0.05), rgba(190, 24, 93, 0.05));
+            opacity: 0; transition: 0.3s;
+        }
+
+        .card-week:hover { 
+            transform: translateY(-8px) scale(1.02); 
+            border-color: rgba(190, 24, 93, 0.3); 
+            box-shadow: 0 20px 40px -10px rgba(67, 56, 202, 0.25);
+        }
+        .card-week:hover::before { opacity: 1; }
+
+        /* الدائرة الكبيرة والجميلة */
+        .week-circle { 
+            width: 80px; height: 80px; 
+            background: var(--gradient-main); 
+            color: white; border-radius: 50%; 
+            display: flex; justify-content: center; align-items: center; 
+            font-size: 2.5rem; /* رقم كبير */
+            font-weight: 900; 
+            margin-bottom: 15px;
+            box-shadow: 0 8px 20px rgba(67, 56, 202, 0.4); /* توهج */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            z-index: 2; transition: 0.3s;
+        }
+        
+        .card-week:hover .week-circle { transform: scale(1.1) rotate(5deg); }
+
+        .week-label { 
+            color: var(--text-gray); font-weight: 800; font-size: 1.1rem; z-index: 2;
+            background: white; padding: 2px 10px; border-radius: 20px;
+        }
+
+        /* ============================================================== */
+
+        /* Content */
+        .content-box { background: white; border-radius: 24px; padding: 30px; margin-top: 30px; box-shadow: var(--shadow-soft); min-height: 600px; border-top: 8px solid var(--primary); }
+        .tabs { display: flex; gap: 12px; margin-bottom: 25px; background: #f1f5f9; padding: 8px; border-radius: 16px; }
+        .tab { flex: 1; padding: 14px; text-align: center; cursor: pointer; font-weight: 800; border-radius: 12px; color: var(--text-gray); transition: 0.2s; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .tab:hover { background: rgba(255,255,255,0.7); color: var(--primary); }
+        .tab.active { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(67, 56, 202, 0.3); }
+
+        .panel { display: none; }
+        .panel.active { display: block; animation: fadeUp 0.3s; }
+
+        #container-sol, .grid-vocab { display: flex; overflow-x: auto; gap: 25px; padding-bottom: 25px; }
+        .sol-img { max-height: 550px; border-radius: 16px; border: 4px solid white; box-shadow: var(--shadow-soft); flex-shrink: 0; }
+        
+        .card-vocab { flex: 0 0 280px; background: white; border: 1px solid #e2e8f0; border-radius: 20px; padding: 25px; text-align: center; position: relative; box-shadow: var(--shadow-soft); transition: 0.3s; }
+        .card-vocab:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .vocab-img { width: 100%; height: 160px; object-fit: contain; margin-bottom: 15px; }
+        .btn-speak { position: absolute; top: 15px; right: 15px; background: var(--primary); color: white; width: 40px; height: 40px; border-radius: 50%; border: none; cursor: pointer; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+
+        .grammar-container { display: grid; gap: 25px; }
+        .rule-box { background: #fff; padding: 30px; border-radius: 20px; border: 1px solid #e2e8f0; border-left: 6px solid var(--accent); box-shadow: var(--shadow-soft); }
+        .grammar-title { font-size: 1.5rem; color: var(--primary); font-weight: 900; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .example { background: #1e293b; color: #f8fafc; padding: 15px; border-radius: 12px; margin-top: 15px; direction: ltr; text-align: left; font-family: monospace; font-size: 1.05rem; border-left: 4px solid var(--primary-light); }
+
+        footer { background: #1e293b; color: white; padding: 50px 0; text-align: center; margin-top: auto; }
+        .social-links { display: flex; gap: 20px; justify-content: center; margin-bottom: 25px; }
+        .social-icon { width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: 0.3s; font-size: 1.3rem; }
+        .social-icon:hover { background: var(--accent); transform: translateY(-5px) scale(1.1); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-wrap">
+            <div class="logo"><i class="fas fa-graduation-cap"></i> English For Grade 6-9 </div>
+            <button class="nav-btn" onclick="goHome()"><i class="fas fa-home"></i> الرئيسية</button>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <!-- Home -->
+        <div id="view-home" class="view active">
+            <div style="text-align:center; margin-top:50px; margin-bottom:50px;">
+                <h1 style="font-size:3rem; color:var(--text-dark); margin-bottom:10px;">منصة التفوق في الإنجليزية</h1>
+                <p style="color:var(--text-gray); font-size:1.2rem;">اختر صفك وابدأ رحلة التميز</p>
+            </div>
+            <div class="grid-grades">
+                <div class="card-grade" onclick="selectGrade(6)"><i class="fas fa-shapes"></i><h2>الصف السادس</h2></div>
+                <div class="card-grade" onclick="selectGrade(7)"><i class="fas fa-rocket"></i><h2>الصف السابع</h2></div>
+                <div class="card-grade" onclick="selectGrade(8)"><i class="fas fa-lightbulb"></i><h2>الصف الثامن</h2></div>
+                <div class="card-grade" onclick="selectGrade(9)"><i class="fas fa-user-graduate"></i><h2>الصف التاسع</h2></div>
+            </div>
+        </div>
+
+        <!-- Weeks (The New Beautiful Grid) -->
+        <div id="view-weeks" class="view">
+            <div style="text-align:center; margin-top:40px; margin-bottom:30px;">
+                <h2 id="grade-title" style="color:var(--primary); font-size:2.5rem; font-weight:900;"></h2>
+                <button onclick="goHome()" style="background:white; border:2px solid #e2e8f0; padding:8px 20px; border-radius:50px; margin-top:15px; cursor:pointer; font-weight:bold; color:var(--text-gray); transition:0.3s;">
+                    <i class="fas fa-arrow-right"></i> عودة للقائمة
+                </button>
+            </div>
+            <div class="grid-weeks" id="weeks-container"></div>
+        </div>
+
+        <!-- Content -->
+        <div id="view-content" class="view">
+            <div class="content-box">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px; padding-bottom:20px; border-bottom:2px solid #f1f5f9;">
+                    <h2 id="content-title" style="color:var(--primary); font-size:1.8rem; font-weight:800;"></h2>
+                    <button onclick="backToWeeks()" style="background:#f1f5f9; border:none; padding:10px 20px; border-radius:10px; cursor:pointer; font-weight:bold; color:var(--text-gray);">رجوع للقائمة</button>
+                </div>
+
+                <div class="tabs">
+                    <div class="tab active" id="tab-sol" onclick="activateTab('sol')"><i class="fas fa-image"></i> الحلول</div>
+                    <div class="tab" id="tab-voc" onclick="activateTab('voc')"><i class="fas fa-language"></i> المفردات</div>
+                    <div class="tab" id="tab-gram" onclick="activateTab('gram')"><i class="fas fa-book"></i> القواعد</div>
+                </div>
+
+                <div id="panel-sol" class="panel active"><div id="container-sol"></div></div>
+                <div id="panel-voc" class="panel"><div id="container-voc" class="grid-vocab"></div></div>
+                <div id="panel-gram" class="panel"><div id="container-gram" class="grammar-container"></div></div>
+
+                <div style="display:flex; justify-content:space-between; margin-top:40px; border-top:2px solid #f1f5f9; padding-top:20px;">
+                    <button class="nav-btn" onclick="navContent(-1)">الدرس السابق</button>
+                    <button class="nav-btn" onclick="navContent(1)">الدرس التالي</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://facebook.com/Dreamer231" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://t.me/anwermes" target="_blank" class="social-icon"><i class="fab fa-telegram-plane"></i></a>
+                <a href="https://wa.me/970599160308" target="_blank" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <div class="copyright">&copy; 2025 English For Grade 6-9 | تصميم وتطوير: المعلم أنور عايش مسمح</div>
+        </div>
+    </footer>
+
+    <script>
+        // ==================== FULL DATA (COMPRESSED) ====================
+        const vocabDB = {
+            6:{1:[{en:"Accident",ar:"حادث",img:"accident.jpeg"},{en:"Awful",ar:"فظيع",img:"awful.webp"},{en:"Bang",ar:"ارتطام",img:"bang.jpg"},{en:"Call",ar:"يتصل",img:"call.jpg"},{en:"Crash",ar:"يتحطم",img:"crash.webp"},{en:"Fall",ar:"يسقط",img:"fall.gif"},{en:"Miss",ar:"يفتقد",img:"miss.avif"},{en:"Stairs",ar:"درج",img:"stairs.jpeg"},{en:"Still",ar:"لا يزال",img:"still.jpg"},{en:"Summer camp",ar:"مخيم صيفي",img:"summer camp.jpeg"},{en:"Tired",ar:"متعب",img:"tired.jpeg"},{en:"Welcome back",ar:"أهلاً بعودتك",img:"welcome back.webp"}],2:[{en:"Anyone",ar:"أي شخص",img:"anyone.png"},{en:"Argue",ar:"يجادل",img:"argue.jpeg"},{en:"Cry",ar:"يبكي",img:"cry.jpeg"},{en:"Give back",ar:"يعيد",img:"give back.jpeg"},{en:"Go away",ar:"يذهب بعيداً",img:"Go away.webp"},{en:"Invite",ar:"يدعو",img:"invite.jpg"},{en:"Lend",ar:"يقرض",img:"lend.jpeg"},{en:"Problem",ar:"مشكلة",img:"problem.jpeg"},{en:"Quiz",ar:"اختبار",img:"quiz.jpg"},{en:"Share",ar:"يشارك",img:"share.jpg"},{en:"Someone",ar:"شخص ما",img:"someone.jpg"},{en:"Understand",ar:"يفهم",img:"understand.jpeg"}],4:[{en:"Adventure",ar:"مغامرة",img:"adventure.jpeg"},{en:"Burst",ar:"ينفجر",img:"burst.jpeg"},{en:"Chase",ar:"يطارد",img:"chase.jpeg"},{en:"Eighteenth",ar:"18",img:"eighteenth.jpeg"},{en:"Fifteenth",ar:"15",img:"fifteenth.jpeg"},{en:"Fourteenth",ar:"14",img:"fourteenth.jpeg"},{en:"Nineteenth",ar:"19",img:"nineteenth.jpeg"},{en:"Seventeenth",ar:"17",img:"seventeenth.jpeg"},{en:"Sixteenth",ar:"16",img:"sixteenth.jpeg"},{en:"Thirteenth",ar:"13",img:"thirteenth.jpeg"},{en:"Thirtieth",ar:"30",img:"thirtieth.jpeg"},{en:"Turn over",ar:"يقلب",img:"turn over.jpeg"},{en:"Twentieth",ar:"20",img:"twentieth.jpeg"},{en:"Twenty-first",ar:"21",img:"twenty first.png"}],6:[{en:"Attack",ar:"يهاجم",img:"attack.jpg"},{en:"Diver",ar:"غواص",img:"diver.jpg"},{en:"Funny",ar:"مضحك",img:"funny.jpg"},{en:"Mouse",ar:"فأر",img:"mouse.jpg"},{en:"Noise",ar:"ضجيج",img:"noise.jpg"},{en:"Other",ar:"آخر",img:"other.jpg"},{en:"Ox",ar:"ثور",img:"ox.jpg"},{en:"Push",ar:"يدفع",img:"push.jpg"},{en:"Safe",ar:"آمن",img:"safe.jpg"},{en:"Together",ar:"معاً",img:"together.jpg"},{en:"While",ar:"بينما",img:"while.png"}],8:[{en:"Burger",ar:"برجر",img:"burger.jpg"},{en:"Prefer",ar:"يفضل",img:"prefer.jpg"},{en:"A little",ar:"قليل",img:"a little.jpg"},{en:"Bottom",ar:"أسفل",img:"bottom.jpg"},{en:"Fizzy drink",ar:"مشروب غازي",img:"fizzy drink.jpg"},{en:"Food pyramid",ar:"الهرم الغذائي",img:"food pyramid.jpg"},{en:"Fried",ar:"مقلي",img:"fried.jpg"},{en:"Good advice",ar:"نصيحة جيدة",img:"good advice.jpg"},{en:"Should",ar:"ينبغي",img:"should.jpg"},{en:"Soup",ar:"حساء",img:"soup.jpg"},{en:"Sweet",ar:"حلوى",img:"sweet.jpg"},{en:"Top",ar:"قمة",img:"top.jpg"}]},
+            7:{2:[{en:"Always",ar:"دائماً",img:"always.jpg"},{en:"Nurse",ar:"ممرضة",img:"nurse.jpg"},{en:"Usually",ar:"عادةً",img:"usually.jpg"},{en:"Sometimes",ar:"أحياناً",img:"sometimes.jpg"},{en:"Often",ar:"غالبا",img:"often.jpg"},{en:"Every",ar:"كل",img:"every.jpg"}],3:[{en:"Email",ar:"بريد إلكتروني",img:"email.jpg"},{en:"Dear",ar:"عزيزي",img:"dear.jpg"}],5:[{en:"Now",ar:"الآن",img:"now.jpg"},{en:"Listen",ar:"استمع",img:"listen.jpg"}],7:[{en:"Feel",ar:"يشعر",img:"feel.jpg"},{en:"Smell",ar:"يشم",img:"smell.jpg"}],8:[{en:"Address",ar:"عنوان",img:"address.jpg"},{en:"Chat",ar:"دردشة",img:"chat.jpg"}]},
+            8:{1:[{en:"At the moment",ar:"في هذه اللحظة",img:"at the moment.jpg"},{en:"Landline",ar:"هاتف أرضي",img:"landline.jpg"},{en:"Family",ar:"عائلة",img:"family.jpg"},{en:"Mrs",ar:"السيدة",img:"mrs.jpg"},{en:"Go online",ar:"يتصل بالنت",img:"go online.jpg"},{en:"On the phone",ar:"على الهاتف",img:"on the phone.jpg"},{en:"Grandma",ar:"جدة",img:"grandma.jpg"},{en:"Project",ar:"مشروع",img:"project.jpg"},{en:"So",ar:"لذلك",img:"so.jpg"},{en:"Channel",ar:"قناة",img:"channel.jpg"},{en:"Documentary",ar:"وثائقي",img:"documentary.jpg"},{en:"Like",ar:"مثل",img:"like.jpg"},{en:"Forecast",ar:"توقعات",img:"forecast.jpg"},{en:"Nationality",ar:"جنسية",img:"nationality.jpg"},{en:"Hurricane",ar:"إعصار",img:"hurricane.jpg"},{en:"Information",ar:"معلومات",img:"information.jpg"},{en:"Serious",ar:"جاد",img:"serious.jpg"},{en:"Speed",ar:"سرعة",img:"speed.jpg"}],3:[{en:"Always",ar:"دائماً",img:"always.jpg"},{en:"Usually",ar:"عادةً",img:"usually.jpg"},{en:"Often",ar:"غالباً",img:"often.jpg"},{en:"Sometimes",ar:"أحياناً",img:"sometimes.jpg"},{en:"Never",ar:"أبداً",img:"never.jpg"},{en:"Every",ar:"كل",img:"every.jpg"},{en:"Fact",ar:"حقيقة",img:"fact.jpg"},{en:"Habit",ar:"عادة",img:"habit.jpg"},{en:"Routine",ar:"روتين",img:"routine.jpg"},{en:"Truth",ar:"حقيقة",img:"truth.jpg"},{en:"Now",ar:"الآن",img:"now.jpg"},{en:"At this moment",ar:"في هذه اللحظة",img:"at this moment.jpg"},{en:"Look",ar:"انظر",img:"look.jpg"},{en:"Listen",ar:"استمع",img:"listen.jpg"},{en:"These days",ar:"هذه الأيام",img:"these days.jpg"}],5:[{en:"Age",ar:"عمر",img:"age.jpg"},{en:"Culture",ar:"ثقافة",img:"culture.jpg"},{en:"Develop",ar:"يتطور",img:"develop.jpg"},{en:"Quite",ar:"تماماً",img:"quite.jpg"},{en:"Seem",ar:"يبدو",img:"seem.jpg"},{en:"Feel like",ar:"يرغب في",img:"feel like.jpg"},{en:"Sound",ar:"صوت",img:"sound.jpg"},{en:"Guitar",ar:"جيتار",img:"guitar.jpg"},{en:"Pizza",ar:"بيتزا",img:"pizza.jpg"},{en:"Classical",ar:"كلاسيكي",img:"classical.jpg"},{en:"Poem",ar:"قصيدة",img:"poem.jpg"},{en:"Folk song",ar:"أغنية شعبية",img:"folk song.jpg"},{en:"Rock music",ar:"روك",img:"rock music.jpg"},{en:"The 1950s",ar:"الخمسينيات",img:"the 1950s.jpg"},{en:"Instrument",ar:"آلة",img:"instrument.jpg"},{en:"The heart of",ar:"جوهر",img:"the heart of.jpg"},{en:"Used to",ar:"اعتاد على",img:"used to.jpg"}],7:[{en:"Feel",ar:"يشعر",img:"feel.jpg"},{en:"Look",ar:"يبدو",img:"look.jpg"},{en:"Seem",ar:"يبدو",img:"seem.jpg"},{en:"Smell",ar:"يشم",img:"smell.jpg"},{en:"Sound",ar:"صوته",img:"sound.jpg"},{en:"Taste",ar:"يتذوق",img:"taste.jpg"},{en:"Need",ar:"يحتاج",img:"need.jpg"},{en:"Can",ar:"يستطيع",img:"can.jpg"},{en:"Can't",ar:"لا يستطيع",img:"can't.jpg"},{en:"Could",ar:"استطاع",img:"could.jpg"},{en:"Couldn't",ar:"لم يستطع",img:"couldn't.jpg"},{en:"Ability",ar:"قدرة",img:"ability.jpg"},{en:"Used to",ar:"اعتاد على",img:"used to.jpg"},{en:"Watch",ar:"يشاهد",img:"watch.jpg"}],8:[{en:"Paris",ar:"باريس",img:"paris.jpg"},{en:"Radio",ar:"راديو",img:"radio.jpg"}]},
+            9:{1:[{en:"Airport",ar:"مطار",img:"airport.jpg"},{en:"Attendant",ar:"مضيف",img:"attendent.jpeg"},{en:"Captain",ar:"كابتن",img:"captain.jpeg"},{en:"Community",ar:"مجتمع",img:"community.jpeg"},{en:"Cooking",ar:"طبخ",img:"cooking.jpeg"},{en:"Damascus Gate",ar:"باب العمود",img:"damascus gate.jpeg"},{en:"Gate",ar:"بوابة",img:"gate.png"},{en:"Guide",ar:"مرشد",img:"guide.jpeg"},{en:"Land",ar:"يهبط",img:"land.jpeg"},{en:"Landing card",ar:"بطاقة هبوط",img:"landing card.jpg"},{en:"Local",ar:"محلي",img:"local.jpeg"},{en:"Mini-bus",ar:"حافلة صغيرة",img:"mini-bus.jpeg"},{en:"Museum",ar:"متحف",img:"museum.jpeg"},{en:"Passport",ar:"جواز سفر",img:"passport.jpeg"},{en:"Religious",ar:"ديني",img:"religious.jpg"},{en:"Right now",ar:"فوراً",img:"right now.png"},{en:"Schedule",ar:"جدول",img:"schedule.jpeg"},{en:"Site",ar:"موقع",img:"site.jpeg"},{en:"Take off",ar:"يقلع",img:"take off.png"},{en:"Through",ar:"عبر",img:"through.jpeg"},{en:"Village",ar:"قرية",img:"village.jpeg"}],2:[{en:"Away",ar:"بعيداً",img:"away.jpg"},{en:"Continue",ar:"يستمر",img:"continue.jpg"},{en:"Dry",ar:"جاف",img:"dry.jpg"},{en:"Keep out",ar:"منع الدخول",img:"keep out.jpg"},{en:"Relax",ar:"يسترخي",img:"relax.jpg"},{en:"Put up",ar:"يثبت",img:"put up.jpg"},{en:"Wet",ar:"مبلل",img:"wet.jpg"},{en:"Carpet",ar:"سجادة",img:"carpet.jpg"},{en:"Curtain",ar:"ستارة",img:"curtain.jpg"},{en:"Dining room",ar:"غرفة طعام",img:"dining room.jpg"},{en:"Hall",ar:"ردهة",img:"hall.jpg"},{en:"Wall",ar:"حائط",img:"wall.jpg"},{en:"Wardrobe",ar:"خزانة",img:"wardrobe.jpg"},{en:"In time",ar:"في الوقت",img:"in time.jpg"},{en:"Special",ar:"خاص",img:"special.jpg"}]}
+        };
+
+        const grammarDB = {
+            6: {
+                3: `<div class="grammar-title">🧐 زمن الماضي البسيط (Simple Past)</div><div class="rule-box"><p>يُستخدم للحديث عن فعل بدأ وانتهى في الماضي.</p><h4 style="color:#805ad5; margin:15px 0 5px;">أ. تكوين الفعل:</h4><table style="width:100%; border-collapse:collapse; margin-bottom:15px; font-size:0.95rem;"><tr style="background:#f7fafc; border-bottom:1px solid #e2e8f0;"><td style="padding:8px;"><strong>1. منتظمة (Regular)</strong></td><td style="padding:8px;">نضيف ed</td><td style="padding:8px; direction:ltr;">Live → Lived</td></tr><tr><td style="padding:8px;"><strong>2. غير منتظمة (Irregular)</strong></td><td style="padding:8px;">تُحفظ كما هي</td><td style="padding:8px; direction:ltr;">Go → Went</td></tr></table><div style="background:#ebf8ff; padding:10px; border-radius:8px; border-right:4px solid #3182ce; font-size:0.9rem;"><strong>⚠️ فعل الكينونة (To Be):</strong><br>Was ➝ للمفرد (I, He, She, It)<br>Were ➝ للجمع (We, You, They)</div></div><div class="rule-box"><h4 style="color:#805ad5; margin-bottom:10px;">ب. الكلمات المفتاحية (Keywords):</h4><p style="background:#fff; padding:5px; border-radius:5px; border:1px dashed #cbd5e1;">Yesterday (أمس) • Last week (الماضي) • Ago (منذ) • In 2020</p></div><div class="rule-box"><h4 style="color:#805ad5; margin-bottom:10px;">ج. النفي والسؤال (Did):</h4><p style="font-size:0.9rem; color:#718096; margin-bottom:10px;">💡 ملاحظة: يعود الفعل لأصله (المصدر) عند استخدام Did.</p><div style="border-right:3px solid #d53f8c; padding-right:10px; margin-bottom:10px;"><p><strong>النفي:</strong> Didn't + المصدر</p><div class="example">She didn't go to the park.</div></div><div style="border-right:3px solid #805ad5; padding-right:10px;"><p><strong>السؤال:</strong> Did + الفاعل + المصدر؟</p><div class="example">Did she go to the park?</div></div></div><div class="grammar-title" style="margin-top:30px; color:#d53f8c;">🔗 أداة الربط "but"</div><div class="rule-box"><p>تعني <strong>"لكن"</strong>، وتستخدم لربط جملتين متناقضتين في المعنى.</p><div class="example">I was sick, but I went to school.</div><div class="example">It was raining, but I went out.</div></div>`,
+                5: `<div class="grammar-title">⏳ الماضي المستمر (Past Continuous)</div><div class="rule-box"><p>وصف حدث كان مستمراً في وقت محدد في الماضي.</p><div style="background:#f0fff4; padding:10px; border-radius:8px; border:1px dashed #48bb78; margin:10px 0;"><strong>التكوين:</strong> Subject + was/were + verb-ing</div><table style="width:100%; font-size:0.9rem;"><tr><td style="font-weight:bold; color:#d53f8c;">Was</td><td>I / He / She / It</td><td>I was sleeping.</td></tr><tr><td style="font-weight:bold; color:#805ad5;">Were</td><td>You / We / They</td><td>They were eating.</td></tr></table></div><div class="grammar-title" style="margin-top:20px; color:#3182ce;">🔗 أدوات الربط (When / While)</div><div class="rule-box" style="border-right:4px solid #d53f8c;"><h4 style="color:#d53f8c;">1. While (بينما)</h4><p>يأتي بعدها <strong>ماضي مستمر</strong> (الحدث الطويل).</p><div class="example">While + Past Continuous , Past Simple</div><div class="example">While we were watching TV, the phone rang.</div></div><div class="rule-box" style="border-right:4px solid #3182ce; margin-top:15px;"><h4 style="color:#3182ce;">2. When (عندما)</h4><p>يأتي بعدها <strong>ماضي بسيط</strong> (الحدث القاطع).</p><div class="example">When + Past Simple , Past Continuous</div><div class="example">When my friend came, I was eating.</div></div><div style="background:#2d3748; color:white; padding:15px; border-radius:10px; margin-top:15px; text-align:center;">💡 <strong>ملخص:</strong><br>While ➝ تحب الـ ing (المستمر)<br>When ➝ تحب الماضي البسيط</div>`
+            },
+            7: {
+                2: `<div class="grammar-title">☀️ المضارع البسيط (Present Simple)</div><div class="rule-box"><p><strong>الاستخدام:</strong></p><ul style="list-style:none; padding-right:10px;"><li>✅ <strong>العادات:</strong> Doctors work long hours.</li><li>✅ <strong>الحقائق:</strong> Babies drink milk.</li></ul></div><div class="rule-box"><h4 style="color:#805ad5;">📏 قاعدة الفعل:</h4><table style="width:100%; border-collapse:collapse; margin-top:10px;"><tr style="border-bottom:1px solid #eee;"><td style="padding:5px;">He / She / It</td><td style="color:#d53f8c; font-weight:bold;">نضيف s / es</td><td>Salma helps Mum.</td></tr><tr><td style="padding:5px;">I / We / You / They</td><td style="color:#3182ce; font-weight:bold;">فعل مجرد</td><td>Rami usually visits.</td></tr></table></div><div class="rule-box"><h4 style="color:#d53f8c;">⏱️ ظروف التكرار (Adverbs of Frequency):</h4><p style="font-size:0.9rem;">Always (100%) • Usually • Often • Sometimes • Never (0%)</p><hr style="border-color:#eee; margin:10px 0;"><p><strong>📍 الموقع:</strong></p><p>1. قبل الفعل الرئيسي: <span class="example" style="display:inline; padding:2px 5px;">Ahmed <b>sometimes</b> sleeps early.</span></p><p>2. بعد فعل الكينونة (is/are): <span class="example" style="display:inline; padding:2px 5px;">He is <b>never</b> bored.</span></p></div><div class="rule-box"><h4 style="color:#e53e3e;">🚫 النفي والسؤال:</h4><table style="width:100%; font-size:0.9rem;"><tr><td><strong>النفي:</strong></td><td>don't / doesn't + مجرد</td></tr><tr><td><strong>السؤال:</strong></td><td>Do / Does + فاعل + مجرد؟</td></tr></table></div>`,
+                3: `<div class="grammar-title">💌 الإيميل الودي (Friendly Email)</div><div class="rule-box"><h4 style="color:#805ad5;">1. الرأس (Header):</h4><table style="width:100%; border:1px solid #e2e8f0; border-radius:5px; margin-top:5px;"><tr style="border-bottom:1px solid #eee;"><td style="padding:5px; background:#f7fafc;">To</td><td>Email صديقك</td></tr><tr style="border-bottom:1px solid #eee;"><td style="padding:5px; background:#f7fafc;">From</td><td>Email الخاص بك</td></tr><tr><td style="padding:5px; background:#f7fafc;">Date</td><td>التاريخ</td></tr></table></div><div class="rule-box"><h4 style="color:#3182ce;">2. التحية (Greeting):</h4><p>Hi Reem, / Dear Ali,</p><p style="margin-top:10px; font-style:italic; color:#718096;">"It was nice to get your email..."</p></div><div class="rule-box"><h4 style="color:#d53f8c;">3. الموضوع (Body):</h4><p>• عرّف بنفسك (Name, Age, School).</p><p>• اسأل صديقك: <span class="example" style="display:inline;">Do you have brothers?</span></p></div><div class="rule-box"><h4 style="color:#38a169;">4. الخاتمة (Closing):</h4><p>Please write soon!</p><p style="font-weight:bold; margin-top:5px;">Mona (التوقيع)</p></div>`,
+                5: `<div class="grammar-title">🏃 المضارع المستمر (Present Continuous)</div><div class="rule-box"><p>يحدث <strong>الآن</strong> (Now).</p><div class="example" style="text-align:center;">am / is / are + Verb-ing</div><p style="margin-top:10px;"><strong>الكلمات الدالة:</strong> Now, Look, Listen, At this moment.</p></div><div class="rule-box"><h4 style="color:#805ad5;">🔠 توافق الفعل:</h4><p>I ➝ am</p><p>He/She/It ➝ is</p><p>We/You/They ➝ are</p></div><div class="rule-box" style="border:2px solid #e53e3e; background:#fff5f5;"><h4 style="color:#e53e3e;">⚠️ قاعدة هامة: أفعال الحالة (Stative Verbs)</h4><p>أفعال الشعور والتفكير <strong>لا تأخذ ing</strong> أبداً!</p><p style="font-weight:bold; margin-top:5px;">(Love, Like, Need, Know, Want, Understand)</p><hr style="border-color:#feb2b2; margin:10px 0;"><p>❌ I am loving Palestine.</p><p>✅ I love Palestine.</p></div>`,
+                7: `<div class="grammar-title" style="color:#e53e3e;">🛑 أفعال الحالة (Stative Verbs)</div><div class="rule-box"><p>هذه هي أهم قاعدة! تتعلق بأفعال تصف الحالة والمشاعر.</p></div><div class="rule-box" style="background:#fffaf0; border:2px solid #ecc94b; border-left-width:6px;"><h4 style="color:#d69e2e; margin-bottom:5px;">🌟 القاعدة الذهبية:</h4><p style="font-size:1.1rem; font-weight:bold; color:#744210;">هذه الأفعال تأتي دائماً في المضارع البسيط.</p><div style="background:#c53030; color:white; display:inline-block; padding:4px 12px; border-radius:20px; margin-top:8px; font-weight:bold; font-size:0.9rem;">🚫 ممنوع استخدام -ing</div><p style="font-size:0.9rem; margin-top:8px; color:#744210;">حتى لو كان الفعل يحدث الآن!</p></div><div style="display:flex; flex-direction:column; gap:15px; margin-top:20px;"><div class="rule-box" style="margin:0; border-right:5px solid #d53f8c; padding-right:15px;"><h4 style="color:#d53f8c;">1. المشاعر والاحتياجات (Feelings)</h4><p style="color:#718096; font-size:0.9rem; margin-bottom:5px;">(Love, Like, Need, Want, Believe)</p><div style="background:#fff5f7; padding:10px; border-radius:8px;">❌ <span style="text-decoration:line-through; color:#e53e3e;">I'm loving Palestine.</span><br>✅ <span style="font-weight:bold; color:#38a169;">I love Palestine.</span></div></div><div class="rule-box" style="margin:0; border-right:5px solid #805ad5; padding-right:15px;"><h4 style="color:#805ad5;">2. الأفكار والمعرفة (Thoughts)</h4><p style="color:#718096; font-size:0.9rem; margin-bottom:5px;">(Know, Think)</p><div style="background:#f3ebf8; padding:10px; border-radius:8px;">❌ <span style="text-decoration:line-through; color:#e53e3e;">The teacher is knowing my name.</span><br>✅ <span style="font-weight:bold; color:#38a169;">The teacher knows my name.</span></div></div><div class="rule-box" style="margin:0; border-right:5px solid #3182ce; padding-right:15px;"><h4 style="color:#3182ce;">3. الحواس والوصف (Senses)</h4><p style="color:#718096; font-size:0.9rem; margin-bottom:5px;">(Smell, Taste, Look)</p><div style="background:#ebf8ff; padding:10px; border-radius:8px;">❌ <span style="text-decoration:line-through; color:#e53e3e;">The flower is smelling nice.</span><br>✅ <span style="font-weight:bold; color:#38a169;">The flower smells nice.</span></div></div></div><div style="margin-top:20px; padding:15px; background:#2d3748; border-radius:10px; text-align:center; color:white;">💡 <strong>تذكر:</strong> الهدف هو التعبير عن "حالة ثابتة" أو "رأي" وليس حدثاً مؤقتاً.</div>`
+            },
+            8: {
+                3: `<div class="grammar-title">⚡ مقارنة: المضارع البسيط vs المستمر</div><table style="width:100%; border-collapse:collapse; text-align:center; margin-top:10px;"><tr style="background:#805ad5; color:white;"><th style="padding:10px;">Simple (البسيط)</th><th style="padding:10px;">Continuous (المستمر)</th></tr><tr style="background:white; border-bottom:1px solid #eee;"><td style="padding:10px;">حقائق / روتين</td><td style="padding:10px;">يحدث الآن / مؤقت</td></tr><tr style="background:#f7fafc; border-bottom:1px solid #eee;"><td style="padding:10px; color:#d53f8c;">Always, Usually</td><td style="padding:10px; color:#3182ce;">Now, At the moment</td></tr><tr style="background:white;"><td style="padding:10px;">Play / Plays</td><td style="padding:10px;">is playing</td></tr></table><div class="rule-box" style="margin-top:15px; background:#fffaf0; border-right:4px solid #dd6b20;"><strong>⚠️ تذكر:</strong> أفعال الشعور (Like, Know, Want) تأتي دائماً في <strong>البسيط</strong> ولا تأخذ ing.</div>`,
+                4: `<div class="grammar-title">📧 كتابة إيميل (Email Writing)</div><div class="rule-box"><h4 style="color:#3182ce;">1. البيانات (Header):</h4><p>Sender: (اسمك)</p><p>Receiver: (اسم الصديق)</p><p>Topic: (الموضوع)</p></div><div class="rule-box"><h4 style="color:#805ad5;">2. الهيكل (Structure):</h4><p><strong>A. التحية:</strong> Dear Sama,</p><p><strong>B. المحتوى:</strong> عرّف بنفسك (I'm Abeer, I'm 14). اسأل صديقك (What do you like?).</p><p><strong>C. الخاتمة:</strong> Please write back soon.</p><p><strong>D. التوقيع:</strong> Best wishes, Abeer</p></div><div class="rule-box" style="background:#ebf8ff;"><strong>💡 نصائح:</strong> ابدأ بحرف كبير (Capital Letter) وضع علامات الترقيم (.) (?).</div>`,
+                8: `<div class="grammar-title">📝 كتابة فقرة من ملاحظات</div><div class="rule-box"><p>كيف تحول "كلمات" إلى "فقرة"؟</p><ol style="padding-right:20px; margin-top:10px;"><li><strong>حول الملاحظة لجملة كاملة:</strong><br><em>Note:</em> Paris: travelled<br><em>Sentence:</em> He travelled to Paris.</li><li style="margin-top:10px;"><strong>استخدم أدوات الربط:</strong><br>(and, but, so, because) لربط الجمل.</li><li style="margin-top:10px;"><strong>انتبه للزمن:</strong><br>ماضي (Travelled) / عادات قديمة (Used to).</li></ol></div><div class="rule-box"><h4 style="color:#d53f8c;">مثال (Example):</h4><p style="background:white; padding:10px; border:1px solid #eee; border-radius:5px;">Muhammad Assaf is a great singer. He is 30 years old. He is from Khan Yunis <strong>but</strong> he lives in Dubai now. He won Arab Idol.</p></div>`
+            },
+            9: {
+                5: `<div class="grammar-title">🔄 الماضي البسيط vs المضارع التام</div><div class="rule-box" style="border-right:4px solid #e53e3e;"><h4 style="color:#e53e3e;">1. الماضي البسيط (Past Simple)</h4><p>حدث <strong>وانتهى</strong> في الماضي.</p><p style="font-size:0.9rem; color:#718096;">Keywords: Yesterday, Last year, Ago, In the past.</p><div class="example">I visited London last year.</div></div><div class="rule-box" style="border-right:4px solid #38a169; margin-top:15px;"><h4 style="color:#38a169;">2. المضارع التام (Present Perfect)</h4><p>حدث بدأ في الماضي وله <strong>أثر أو امتداد</strong> حتى الآن.</p><p style="font-size:0.9rem; color:#718096;">Form: Have/Has + P.P</p><div class="example">I have lived here for 3 years.</div></div><div class="grammar-title" style="margin-top:20px; font-size:1.2rem; color:#805ad5;">المفتاح السحري: For vs Since</div><div class="rule-box"><table style="width:100%;"><tr><td style="width:50%; vertical-align:top;"><strong>⏳ For (لمدة):</strong><br>تأتي بعدها "مدة زمنية".<br><span style="color:#d53f8c;">For 3 days, For a week.</span></td><td style="width:50%; vertical-align:top; border-right:1px solid #eee; padding-right:10px;"><strong>📅 Since (منذ):</strong><br>تأتي بعدها "نقطة بداية".<br><span style="color:#3182ce;">Since 2010, Since I was young.</span></td></tr></table></div>`
+            }
+        };
+
+        let currentGrade = null, currentWeek = null, currentTab = 'sol'; 
+
+        function activateTab(t) {
+            currentTab = t;
+            document.querySelectorAll('.tab').forEach(e => e.classList.remove('active'));
+            document.querySelectorAll('.panel').forEach(e => e.classList.remove('active'));
+            const tabEl = document.getElementById('tab-' + t);
+            const panelEl = document.getElementById('panel-' + t);
+            if(tabEl) tabEl.classList.add('active');
+            if(panelEl) panelEl.classList.add('active');
+        }
+
+        function selectGrade(g) {
+            currentGrade = g;
+            document.getElementById('grade-title').innerText = "الصف " + g;
+            const c = document.getElementById('weeks-container');
+            let h = '';
+            for(let w=1; w<=12; w++) {
+                h += `
+                <div class="card-week" onclick="selectContent(${w})">
+                    <div class="week-circle">${w}</div>
+                    <div class="week-label">الأسبوع</div>
+                </div>`;
+            }
+            c.innerHTML = h;
+            switchView('view-weeks');
+        }
+
+        function selectContent(w) {
+            currentWeek = w;
+            document.getElementById('content-title').innerText = "الصف " + currentGrade + " - الأسبوع " + w;
+            const p = (currentGrade === 6) ? ("grade6-" + w) : ("grade" + currentGrade + "/week" + w);
+
+            document.getElementById('container-sol').innerHTML = `
+                <img src="${p}/card1.jpg" class="sol-img" onerror="this.style.display='none'">
+                <img src="${p}/card2.jpg" class="sol-img" onerror="this.style.display='none'">
+                <img src="${p}/card3.jpg" class="sol-img" onerror="this.style.display='none'">
+            `;
+
+            const v = document.getElementById('container-voc');
+            const arr = (vocabDB[currentGrade] && vocabDB[currentGrade][w]) ? vocabDB[currentGrade][w] : [];
+            if(arr.length === 0) v.innerHTML = '<div style="width:100%; text-align:center; color:#888; font-weight:bold;">لا توجد مفردات مسجلة لهذا الأسبوع</div>';
+            else v.innerHTML = arr.map(x => `
+                <div class="card-vocab">
+                    <button class="btn-speak" onclick="speak('${x.en.replace(/'/g,"\\'")}')"><i class="fas fa-volume-up"></i></button>
+                    <img src="${p}/${x.img}" class="vocab-img" onerror="this.src='https://placehold.co/300x200/e2e8f0/475569?text=${x.en}'">
+                    <div class="vocab-word">${x.en}</div>
+                    <div class="vocab-ar">${x.ar}</div>
+                </div>
+            `).join('');
+
+            document.getElementById('container-gram').innerHTML = (grammarDB[currentGrade] && grammarDB[currentGrade][w]) ? grammarDB[currentGrade][w] : '<div style="text-align:center; color:#888; font-weight:bold;">لا توجد قواعد مسجلة لهذا الأسبوع</div>';
+
+            activateTab(currentTab); 
+            switchView('view-content');
+        }
+
+        function switchView(id) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        function goHome() { currentTab='sol'; switchView('view-home'); }
+        function backToWeeks() { switchView('view-weeks'); }
+        function navContent(d) { const n = currentWeek + d; if(n >= 1 && n <= 12) selectContent(n); }
+        function speak(t) { const u = new SpeechSynthesisUtterance(t); u.lang = 'en-US'; window.speechSynthesis.speak(u); }
+    </script>
+</body>
+</html>
