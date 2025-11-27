@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>English For Grade 8 - مفردات وقواعد الأسبوع الثالث</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Alexandria:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #ff7f50;
+            --secondary: #1F2F4E;
+            --accent: #ffaa6b;
+            --light-bg: #f5f7fa;
+            --white: #ffffff;
+            --radius: 16px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--light-bg);
+            color: var(--secondary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: var(--radius);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 900;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            background: var(--primary);
+            color: var(--white);
+            padding: 12px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        nav a:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            background: var(--secondary);
+            color: var(--white);
+            padding: 12px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-bottom: 30px;
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            transform: translateX(5px);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary);
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+        }
+
+        .grammar-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            transition: var(--transition);
+        }
+
+        .grammar-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .grammar-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .grammar-section {
+            margin-bottom: 25px;
+        }
+
+        .grammar-section h3 {
+            color: var(--secondary);
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .grammar-list {
+            list-style: none;
+            padding-right: 20px;
+        }
+
+        .grammar-list li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-right: 25px;
+        }
+
+        .grammar-list li:before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            position: absolute;
+            right: 0;
+        }
+
+        .example {
+            background: var(--light-bg);
+            padding: 15px;
+            border-radius: var(--radius);
+            margin: 15px 0;
+            font-style: italic;
+            border-right: 4px solid var(--accent);
+        }
+
+        .note {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: var(--radius);
+            margin: 20px 0;
+            border-right: 4px solid #ffc107;
+        }
+
+        .note-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .key-words {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .key-word {
+            background: var(--accent);
+            color: var(--white);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .form-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        .form-table th, .form-table td {
+            padding: 12px 15px;
+            text-align: right;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .form-table th {
+            background-color: var(--light-bg);
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        .form-table tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            header p {
+                font-size: 1rem;
+            }
+            .container {
+                padding: 20px 15px;
+            }
+            .section-title {
+                font-size: 1.6rem;
+            }
+            .grammar-title {
+                font-size: 1.5rem;
+            }
+            .grammar-section h3 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>English For Grade 8</h1>
+    <p>مفردات وقواعد الأسبوع الثالث - الصف الثامن</p>
+</header>
+
+<nav>
+    <a href="../../index6-9.html"><i class="fas fa-home"></i> الرئيسية</a>
+    <a href="week3_solution.html"><i class="fas fa-file-alt"></i> البطاقة</a>
+</nav>
+
+<div class="container">
+    <a class="back-btn" href="../../index6-9.html"><i class="fas fa-arrow-right"></i> العودة للرئيسية</a>
+
+    <h2 class="section-title">⚡️ تلخيص قواعد المضارع البسيط والمستمر</h2>
+
+    <!-- المضارع البسيط -->
+    <div class="grammar-card">
+        <h2 class="grammar-title">
+            <i class="fas fa-circle" style="color: #4CAF50;"></i>
+            المضارع البسيط (Present Simple Tense)
+        </h2>
+
+        <p>يُستخدم هذا الزمن للتعبير عن الأشياء الثابتة، الروتينية، والحقائق التي لا تتغير.</p>
+
+        <div class="grammar-section">
+            <h3><i class="fas fa-question-circle"></i> متى نستخدمه؟</h3>
+            <ul class="grammar-list">
+                <li>للتعبير عن الحقائق العامة. (مثل: الشمس تشرق من الشرق).</li>
+                <li>للتعبير عن الروتين والعادات. (مثل: أذهب إلى المدرسة كل يوم).</li>
+                <li>للتعبير عن الأفعال التي لا تتغير (أفعال المشاعر). (مثل: أحب كرة القدم).</li>
+            </ul>
+        </div>
+
+        <div class="grammar-section">
+            <h3><i class="fas fa-key"></i> الكلمات المفتاحية (Key Words)</h3>
+            <div class="key-words">
+                <span class="key-word">always (دائماً)</span>
+                <span class="key-word">usually (عادةً)</span>
+                <span class="key-word">often (غالباً)</span>
+                <span class="key-word">sometimes (أحياناً)</span>
+                <span class="key-word">every (كل)</span>
+                <span class="key-word">never (أبداً)</span>
+            </div>
+        </div>
+
+        <div class="grammar-section">
+            <h3><i class="fas fa-pen"></i> كيف نكون الجملة؟ (Form)</h3>
+            <table class="form-table">
+                <tr>
+                    <th>الفاعل</th>
+                    <th>الفعل</th>
+                </tr>
+                <tr>
+                    <td>I / We / You / They</td>
+                    <td>الفعل مجرد (play)</td>
+                </tr>
+                <tr>
+                    <td>He / She / It</td>
+                    <td>الفعل + s/es (plays)</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="grammar-section">
+            <h3><i class="fas fa-lightbulb"></i> أمثلة بسيطة:</h3>
+            <div class="example">
+                <p><strong>مثال (روتين):</strong> They visit the library every week. (يزورون المكتبة كل أسبوع).</p>
+            </div>
+            <div class="example">
+                <p><strong>مثال (حقيقة):</strong> Sara always goes to school by bus. (سارة دائماً تذهب إلى المدرسة بالحافلة).</p>
+            </div>
+            <div class="example">
+                <p><strong>مثال (نفي):</strong> He doesn't like basketball. (هو لا يحب كرة السلة).</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- المضارع المستمر -->
+    <div class="grammar-card">
+        <h2 class="grammar-title">
+            <i class="fas fa-circle" style="color: #2196F3;"></i>
+            المضارع المستمر (Present Continuous Tense)
+        </h2>
+
+        <p>يُستخدم هذا الزمن للتعبير عن الأفعال التي تحدث الآن في هذه اللحظة، أو مؤقتة وتستمر لفترة.</p>
+
+        <div class="grammar-section">
+            <h3><i class="fas fa-question-circle"></i> متى نستخدمه؟</h3>
+            <ul class="grammar-list">
+                <li>للتعبير عن فعل يحدث "الآن" لحظة الكلام. (مثل: أنا أكتب الآن).</li>
+                <li>للتعبير عن أفعال مؤقتة تحدث في الوقت الحالي (حول هذه الأيام). (مثل: أنا أقرأ كتاباً جديداً هذه الأيام).</li>
+            </ul>
+        </div>
+
+        <div class="grammar-section">
+            <h3><i class="fas fa-key"></i> الكلمات المفتاحية (Key Words)</h3>
+            <div class="key-words">
+                <span class="key-word">now (الآن)</span>
+                <span class="key-word">at the moment (في هذه اللحظة)</span>
+                <span class="key-word">look! / Listen! (انظر! / استمع!)</span>
+                <span class="key-word">these days (هذه الأيام)</span>
+            </div>
+        </div>
+
+        <div class="grammar-section">
+            <h3><i class="fas fa-pen"></i> كيف نكون الجملة؟ (Form)</h3>
+            <table class="form-table">
+                <tr>
+                    <th>الفاعل</th>
+                    <th>الفعل المساعد + الفعل</th>
+                </tr>
+                <tr>
+                    <td>I</td>
+                    <td>am + Verb-ing</td>
+                </tr>
+                <tr>
+                    <td>He / She / It</td>
+                    <td>is + Verb-ing</td>
+                </tr>
+                <tr>
+                    <td>We / You / They</td>
+                    <td>are + Verb-ing</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="grammar-section">
+            <h3><i class="fas fa-lightbulb"></i> أمثلة بسيطة:</h3>
+            <div class="example">
+                <p><strong>مثال (الآن):</strong> They are talking on the phone now. (هم يتحدثون على الهاتف الآن).</p>
+            </div>
+            <div class="example">
+                <p><strong>مثال (الآن):</strong> Sami is chatting with his friends at the moment. (سامي يدردش مع أصدقائه في هذه اللحظة).</p>
+            </div>
+            <div class="example">
+                <p><strong>مثال (أمر):</strong> Look! It is raining outside. (انظر! إنها تمطر في الخارج).</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ملاحظة هامة -->
+    <div class="note">
+        <div class="note-title">
+            <i class="fas fa-exclamation-triangle"></i>
+            ملاحظة هامة: أفعال المشاعر (Verbs of Feelings)
+        </div>
+        <p>هناك أفعال لا تستخدم عادةً في زمن المضارع المستمر (أي لا تأخذ -ing)، وتُستخدم دائماً في المضارع البسيط، حتى لو كان المعنى يشير إلى الآن.</p>
+
+        <div class="key-words" style="margin-top: 15px;">
+            <span class="key-word" style="background: #ffc107; color: #856404;">love</span>
+            <span class="key-word" style="background: #ffc107; color: #856404;">like</span>
+            <span class="key-word" style="background: #ffc107; color: #856404;">hate</span>
+            <span class="key-word" style="background: #ffc107; color: #856404;">know</span>
+            <span class="key-word" style="background: #ffc107; color: #856404;">prefer</span>
+            <span class="key-word" style="background: #ffc107; color: #856404;">mean</span>
+            <span class="key-word" style="background: #ffc107; color: #856404;">need</span>
+            <span class="key-word" style="background: #ffc107; color: #856404;">understand</span>
+            <span class="key-word" style="background: #ffc107; color: #856404;">want</span>
+        </div>
+
+        <div class="example" style="margin-top: 15px;">
+            <p><strong>مثال خاطئ:</strong> I am understanding English.</p>
+            <p><strong>مثال صحيح:</strong> I understand English better now. (المضارع البسيط).</p>
+        </div>
+
+        <div class="example">
+            <p><strong>مثال خاطئ:</strong> He is knowing my name.</p>
+            <p><strong>مثال صحيح:</strong> He knows my name. (المضارع البسيط).</p>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
